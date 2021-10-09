@@ -5,6 +5,9 @@
 
 namespace vk {
 
+ApiException::ApiException(const std::string& msg) noexcept
+    : std::runtime_error{msg} {}
+
 Client::Client(const std::string& token) : m_token{token} {}
 
 std::string Client::queryParams(const json& data) {
@@ -28,7 +31,7 @@ json Client::method(const std::string& name, json params) {
     const auto response = m_session.post(Client::url + name, Client::queryParams(params));
     json data = json::parse(response);
     if (!data.contains("response")) {
-        throw std::runtime_error{"Error from VK:" + data.dump(4)};
+        throw ApiException{"Error from VK:" + data.dump(4)};
     }
     return data["response"];
 }
