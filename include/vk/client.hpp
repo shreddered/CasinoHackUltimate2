@@ -5,11 +5,17 @@
 // json
 #include <nlohmann/json.hpp>
 // STL headers
+#include <stdexcept>
 #include <string>
 
 namespace vk {
 
 using nlohmann::json;
+
+class ApiException : public std::runtime_error {
+public:
+    explicit ApiException(const std::string& msg) noexcept;
+}; // class ApiException
 
 class Client {
 public:
