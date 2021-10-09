@@ -15,6 +15,8 @@ struct Data {
 
 Data getHostAndTarget(const std::string& url);
 
+std::string escape(const std::string& unescaped);
+
 } // namespace utils
 
 } // namespace http
