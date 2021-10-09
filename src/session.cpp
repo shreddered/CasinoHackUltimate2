@@ -2,8 +2,6 @@
 #include "http/session.hpp"
 #include "http/utils.hpp"
 
-#include <regex>
-
 namespace http {
 
 Session::Session() : m_ctx{ssl::context::tlsv12_client} {
@@ -25,16 +23,16 @@ std::string Session::get(const std::string& url) {
     return beast::buffers_to_string(response.body().data());
 }
 
-std::string Session::post(const std::string& url, const json& j) {
+std::string Session::post(const std::string& url, const std::string& str) {
     const auto data = utils::getHostAndTarget(url);
     Connection conn{m_ioc, m_ctx}; 
     conn.open(data.host, "443");
 
-    http::request<http::string_body> request{http::verb::post, data.target, 11};
+    http::request<http::string_body> request{http::verb::post, data.target + '?' + str, 11};
     request.set(http::field::host, data.host);
     request.set(http::field::user_agent, BOOST_BEAST_VERSION_STRING);
-    request.set(http::field::content_type, "application/json");
-    request.body() = j.dump();
+    request.set(http::field::content_type, "application/x-www-form-urlencode");
+    request.body() = str;
     request.prepare_payload();
 
     auto response = conn.send(request);
