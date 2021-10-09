@@ -29,6 +29,8 @@ endif()
 
 find_package(OpenCV CONFIG REQUIRED)
 
+find_package(nlohmann_json REQUIRED)
+
 add_executable(bot
   ${CMAKE_CURRENT_SOURCE_DIR}/src/client.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/connection.cpp
@@ -48,5 +50,6 @@ target_link_libraries(bot
   Boost::boost Boost::program_options Boost::system
   OpenSSL::SSL OpenSSL::Crypto
   Tesseract::tesseract
+  nlohmann_json::nlohmann_json
   ${OpenCV_LIBS}
 )
