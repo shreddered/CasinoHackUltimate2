@@ -32,7 +32,9 @@ find_package(OpenCV CONFIG REQUIRED)
 add_executable(bot
   ${CMAKE_CURRENT_SOURCE_DIR}/src/client.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/connection.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/eval.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/miner.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/session.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/utils.cpp
 )
@@ -45,4 +47,6 @@ target_link_libraries(bot
   PRIVATE Threads::Threads
   Boost::boost Boost::program_options Boost::system
   OpenSSL::SSL OpenSSL::Crypto
+  Tesseract::tesseract
+  ${OpenCV_LIBS}
 )
