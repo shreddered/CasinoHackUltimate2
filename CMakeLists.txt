@@ -20,6 +20,15 @@ if (NOT OpenSSL_FOUND)
   add_library(OpenSSL::Crypto ALIAS PkgConfig::Crypto)
 endif()
 
+find_package(Tesseract)
+if (NOT Tesseract_FOUND)
+  find_package(PkgConfig REQUIRED)
+  pkg_check_modules(Tesseract REQUIRED IMPORTED_TARGET tesseract lept)
+  add_library(Tesseract::tesseract ALIAS PkgConfig::Tesseract)
+endif()
+
+find_package(OpenCV CONFIG REQUIRED)
+
 add_executable(bot
   ${CMAKE_CURRENT_SOURCE_DIR}/src/client.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/connection.cpp
