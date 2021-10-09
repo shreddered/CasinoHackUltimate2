@@ -21,6 +21,7 @@ if (NOT OpenSSL_FOUND)
 endif()
 
 add_executable(bot
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/client.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/connection.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/session.cpp

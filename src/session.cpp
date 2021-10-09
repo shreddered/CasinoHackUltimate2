@@ -28,7 +28,8 @@ std::string Session::post(const std::string& url, const std::string& str) {
     Connection conn{m_ioc, m_ctx}; 
     conn.open(data.host, "443");
 
-    http::request<http::string_body> request{http::verb::post, data.target + '?' + str, 11};
+    const std::string res = data.target + '?' + str;
+    http::request<http::string_body> request{http::verb::post, res, 11};
     request.set(http::field::host, data.host);
     request.set(http::field::user_agent, BOOST_BEAST_VERSION_STRING);
     request.set(http::field::content_type, "application/x-www-form-urlencode");
