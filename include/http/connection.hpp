@@ -14,7 +14,7 @@ public:
     Connection(net::io_context& ioc, ssl::context& ctx);
     void open(const std::string& host, const std::string& port);
     http::response<http::dynamic_body> send(const http::request<http::string_body>& request);
-    virtual ~Connection();
+    virtual ~Connection() noexcept;
 private:
     beast::ssl_stream<beast::tcp_stream> m_stream;
     beast::flat_buffer m_buf;

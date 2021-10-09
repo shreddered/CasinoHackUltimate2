@@ -26,7 +26,7 @@ http::response<http::dynamic_body> Connection::send(
     return response;
 }
 
-Connection::~Connection() {
+Connection::~Connection() noexcept {
     beast::error_code ec;
     m_stream.shutdown(ec);
 }
