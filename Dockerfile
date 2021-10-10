@@ -19,7 +19,7 @@ RUN set -ex;                            \
 FROM base AS builder
 
 RUN set -ex;   \
-    apt install -y g++ cmake
+    apt install -y g++ cmake pkg-config
 
 COPY . /usr/src
 
