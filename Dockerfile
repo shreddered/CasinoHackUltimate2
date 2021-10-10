@@ -6,6 +6,7 @@ RUN set -ex;                            \
     apt update;                         \
     apt install -y                      \
         libboost-dev                    \
+        libboost-system-dev             \
         libboost-program-options-dev    \
         libssl-dev                      \
         libopencv-core-dev              \
