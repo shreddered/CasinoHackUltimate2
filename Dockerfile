@@ -9,9 +9,7 @@ RUN set -ex;                            \
         libboost-system-dev             \
         libboost-program-options-dev    \
         libssl-dev                      \
-        libopencv-core-dev              \
-        libopencv-imgcodecs-dev         \
-        libopencv-imgproc-dev           \
+        libopencv-dev                   \
         nlohmann-json3-dev              \
         tesseract-ocr                   \
         libtesseract-dev
