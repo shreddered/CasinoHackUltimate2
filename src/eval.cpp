@@ -73,20 +73,24 @@ std::string eval(const std::string& image) {
     std::vector<std::string> v = { wrap(recognizeRect(num1)), wrap(recognizeRect(num2)), wrap(recognizeRect(den1)), wrap(recognizeRect(den2)) };
     // for (const auto& elem : v)
         // std::cout << elem << ' ';
-    Fraction<int> f1(std::stoi(v[0]), std::stoi(v[2])),
-                f2(std::stoi(v[1]), std::stoi(v[3]));
-    std::string s = wrap2(recognizeRect(oper));
-    switch(s.front()) {
-        case '+':
-            return (f1 + f2).toString();
-        case '/':
-            return (f1 / f2).toString();
-        case '*':
-            return (f1 * f2).toString();
-        case '-':
-            return (f1 - f2).toString();
-        default:
-            throw EvalException{"Unknown operator: " + s};
+    try {
+        Fraction<int> f1(std::stoi(v[0]), std::stoi(v[2])),
+                    f2(std::stoi(v[1]), std::stoi(v[3]));
+        std::string s = wrap2(recognizeRect(oper));
+        switch(s.front()) {
+            case '+':
+                return (f1 + f2).toString();
+            case '/':
+                return (f1 / f2).toString();
+            case '*':
+                return (f1 * f2).toString();
+            case '-':
+                return (f1 - f2).toString();
+            default:
+                throw EvalException{"Unknown operator: " + s};
+        }
+    } catch(std::invalid_argument e) {
+        throw EvalException{"stoi failed"};
     }
 }
 
