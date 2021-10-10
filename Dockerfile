@@ -32,4 +32,4 @@ FROM base AS runtime
 
 COPY --from=builder /usr/bin /usr/bin
 
-ENTRYPOINT ./run.sh
+ENTRYPOINT bot
