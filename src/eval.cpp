@@ -42,7 +42,7 @@ std::string wrap2(const std::string& input) {
     for (const auto& c : input) {
         if (std::isspace(c))
             continue;
-        if (c == '"')
+        if (c == '"' || c == 'o')
             result += '*';
         else if (c == '7')
             result += '/';
@@ -61,22 +61,26 @@ std::string eval(const std::string& image) {
              num2 = cv::Rect(480 - 60, 214 - 40, 120, 90),
              den2 = cv::Rect(480 - 60, 334 - 40, 120, 90),
              oper = cv::Rect(350 - 60, 214 - 40, 120, 140);
-    tesseract::TessBaseAPI tess;
-    if (tess.Init(nullptr, "eng")) {
-        return "";
-    }
-    auto recognizeRect = [&tess, &dst](cv::Rect rect) {
+    auto recognizeRect = [&dst](cv::Rect rect, tesseract::PageSegMode psm) {
+        tesseract::TessBaseAPI tess;
+        if (tess.Init(nullptr, "eng")) {
+            throw EvalException{"Cannot init Tesseract API"};
+        }
         cv::Mat cropped = dst(rect);
         tess.SetImage(cropped.data, cropped.size().width, cropped.size().height, cropped.channels(), cropped.step1());
+        tess.SetPageSegMode(psm);
         return std::string{tess.GetUTF8Text()};
     };
-    std::vector<std::string> v = { wrap(recognizeRect(num1)), wrap(recognizeRect(num2)), wrap(recognizeRect(den1)), wrap(recognizeRect(den2)) };
-    // for (const auto& elem : v)
-        // std::cout << elem << ' ';
+    std::vector<std::string> v = {
+        wrap(recognizeRect(num1, tesseract::PSM_SINGLE_WORD)),
+        wrap(recognizeRect(num2, tesseract::PSM_SINGLE_WORD)),
+        wrap(recognizeRect(den1, tesseract::PSM_SINGLE_WORD)),
+        wrap(recognizeRect(den2, tesseract::PSM_SINGLE_WORD))
+    };
     try {
         Fraction<int> f1(std::stoi(v[0]), std::stoi(v[2])),
                     f2(std::stoi(v[1]), std::stoi(v[3]));
-        std::string s = wrap2(recognizeRect(oper));
+        std::string s = wrap2(recognizeRect(oper, tesseract::PSM_SINGLE_CHAR));
         switch(s.front()) {
             case '+':
                 return (f1 + f2).toString();
