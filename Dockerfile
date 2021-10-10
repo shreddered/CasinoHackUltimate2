@@ -30,4 +30,4 @@ FROM base AS runtime
 
 COPY --from=builder /usr/bin /usr/bin
 
-ENTRYPOINT bot --token=$TOKEN
+CMD ["/usr/bin/bot", "--token=$TOKEN"]

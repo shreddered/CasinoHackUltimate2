@@ -2,7 +2,7 @@ build:
   docker:
     worker: Dockerfile
 
-run:
-  worker:
-    command:
-      - bot --token $TOKEN
+# run:
+  # worker:
+    # command:
+      # - bot --token $TOKEN
