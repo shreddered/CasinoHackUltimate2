@@ -60,16 +60,16 @@ void Miner::run() {
     while (1) {
         try {
             sendMessage("Ур. 12", actions["level"]);
-            std::this_thread::sleep_for(std::chrono::seconds(2));
+            std::this_thread::sleep_for(std::chrono::seconds(4));
             auto const data = getLastImage();
             auto const ans = math::eval(data);
-            std::this_thread::sleep_for(std::chrono::seconds(7));
+            std::this_thread::sleep_for(std::chrono::seconds(8));
             sendMessage(ans);
-            std::this_thread::sleep_for(std::chrono::seconds(4));
+            std::this_thread::sleep_for(std::chrono::seconds(6));
             if (getLastMessage() == "Ответ неверный, попробуйте ещё раз...") {
                 std::this_thread::sleep_for(std::chrono::seconds(4));
                 sendMessage("Показать ответ", actions["show_answer"]);
-                std::this_thread::sleep_for(std::chrono::seconds(4));
+                std::this_thread::sleep_for(std::chrono::seconds(7));
             }
         } catch(math::EvalException e) { // give up on failure
             std::this_thread::sleep_for(std::chrono::seconds(4));
