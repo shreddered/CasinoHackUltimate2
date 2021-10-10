@@ -32,4 +32,4 @@ FROM base AS runtime
 
 COPY --from=builder /usr/bin /usr/bin
 
-ENTRYPOINT bot --token=$TOKEN
+ENTRYPOINT ./run.sh
