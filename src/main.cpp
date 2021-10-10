@@ -14,8 +14,8 @@ int main(int argc, char* argv[]) {
     boost::program_options::options_description desc("Allowed options");
     desc.add_options()
         ("help", "print this help message")
-        ("token-file", boost::program_options::value<std::string>(),
-            "path to file with token");
+        ("token", boost::program_options::value<std::string>(),
+            "VK API access token");
     boost::program_options::variables_map vm;
     boost::program_options::store(
             boost::program_options::parse_command_line(argc, argv, desc),
@@ -25,13 +25,11 @@ int main(int argc, char* argv[]) {
         std::cout << desc << std::endl;
         return 0;
     }
-    if (!vm.count("token-file")) {
+    if (!vm.count("token")) {
         std::cerr << desc << std::endl;
         return 1;
     }
-    std::ifstream in{vm["token-file"].as<std::string>()};
-    std::string token;
-    std::getline(in, token);
+    std::string token = vm["token"].as<std::string>();
     coin::Miner miner{token};
     miner.run();
     return 0;
