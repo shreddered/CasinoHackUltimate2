@@ -5,4 +5,4 @@ build:
 run:
   worker:
     command:
-      - bot --token=$TOKEN
+      - bot --token $TOKEN
