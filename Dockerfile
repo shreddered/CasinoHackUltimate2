@@ -2,14 +2,17 @@ FROM ubuntu:21.04 AS base
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN set -ex;                \
-    apt update;             \
-    apt install -y          \
-        libboost-all-dev    \
-        libssl-dev          \
-        libopencv-dev       \
-        nlohmann-json3-dev  \
-        tesseract-ocr       \
+RUN set -ex;                            \
+    apt update;                         \
+    apt install -y                      \
+        libboost-dev                    \
+        libboost-program-options-dev    \
+        libssl-dev                      \
+        libopencv-core-dev              \
+        libopencv-imgcodecs-dev         \
+        libopencv-imgproc-dev           \
+        nlohmann-json3-dev              \
+        tesseract-ocr                   \
         libtesseract-dev
 
 FROM base AS builder
