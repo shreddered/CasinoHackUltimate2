@@ -79,4 +79,4 @@ void Miner::run() {
     }
 }
 
-}
+} // namespace coin

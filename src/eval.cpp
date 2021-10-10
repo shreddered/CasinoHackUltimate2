@@ -9,7 +9,9 @@
 #include <opencv2/core/mat.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
+
 #include <tesseract/baseapi.h>
+#include <tesseract/publictypes.h>
 
 namespace coin::math {
 
