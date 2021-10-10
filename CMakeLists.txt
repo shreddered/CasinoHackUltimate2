@@ -53,3 +53,7 @@ target_link_libraries(bot
   nlohmann_json::nlohmann_json
   ${OpenCV_LIBS}
 )
+
+install(TARGETS bot
+  RUNTIME DESTINATION bin/
+)
