@@ -3,4 +3,4 @@ build:
     worker: Dockerfile
 
 run:
-  worker: bot --token "$TOKEN"
+  worker: "bot --token $TOKEN"
