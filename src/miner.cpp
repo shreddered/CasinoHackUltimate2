@@ -72,7 +72,8 @@ void Miner::run() {
                 std::this_thread::sleep_for(std::chrono::seconds(8));
             }
         } catch(math::EvalException e) { // give up on failure
-            std::this_thread::sleep_for(std::chrono::seconds(4));
+            std::clog << e.what() << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(8));
             sendMessage("Показать ответ", actions["show_answer"]);
             std::this_thread::sleep_for(std::chrono::seconds(8));
         }
