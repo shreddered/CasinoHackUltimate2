@@ -2,5 +2,5 @@ build:
   docker:
     worker: Dockerfile
 
-# run:
-  # worker: "bot --token $TOKEN"
+run:
+  worker: bot

@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Boost
-  COMPONENTS program_options system
+  COMPONENTS system
   CONFIG REQUIRED)
 
 find_package(Threads)
@@ -47,7 +47,7 @@ target_include_directories(bot
 
 target_link_libraries(bot
   PRIVATE Threads::Threads
-  Boost::boost Boost::program_options Boost::system
+  Boost::boost Boost::system
   OpenSSL::SSL OpenSSL::Crypto
   Tesseract::tesseract
   nlohmann_json::nlohmann_json
