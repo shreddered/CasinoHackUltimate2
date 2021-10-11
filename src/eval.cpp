@@ -79,6 +79,10 @@ std::string eval(const std::string& image) {
         wrap(recognizeRect(den1, tesseract::PSM_SINGLE_WORD)),
         wrap(recognizeRect(den2, tesseract::PSM_SINGLE_WORD))
     };
+    for (const auto& elem : v) {
+        std::cout << elem << ' ';
+    }
+    std::endl(std::cout);
     try {
         Fraction<int> f1(std::stoi(v[0]), std::stoi(v[2])),
                     f2(std::stoi(v[1]), std::stoi(v[3]));
