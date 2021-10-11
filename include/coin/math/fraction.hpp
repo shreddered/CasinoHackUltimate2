@@ -1,6 +1,7 @@
 #ifndef INCLUDE_COIN_MATH_FRACTION_HPP_
 #define INCLUDE_COIN_MATH_FRACTION_HPP_
 
+#include <numeric>
 #include <ostream>
 #include <stdexcept>
 #include <string>
@@ -58,15 +59,8 @@ public:
         return *this; // lol
     }
 private:
-    static constexpr T gcd(T a, T b) noexcept { // greatest CUMmon divisor
-        while(b) {
-            a %= b;
-            std::swap(a, b);
-        }
-        return a;
-    }
     constexpr Fraction<T>& reduce() noexcept {
-        T div = Fraction::gcd(this->num, this->den);
+        T div = std::gcd(this->num, this->den);
         this->num /= div;
         this->den /= div;
         return *this;
